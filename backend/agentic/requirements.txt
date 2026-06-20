@@ -1,0 +1,55 @@
+# Unified Requirements for Agentic Module & Report Generation Agent
+# Install with: pip install -r requirements.txt
+
+# === Core Web Framework ===
+typing-extensions>=4.12.2
+fastapi==0.120.4
+uvicorn==0.38.0
+pydantic==2.12.3
+
+# === Environment & Configuration ===
+python-dotenv==1.1.1
+setuptools<81
+
+# === Database ===
+psycopg2-binary==2.9.11
+asyncpg>=0.30.0  # Async PostgreSQL driver
+sqlalchemy==2.0.44
+motor>=3.3.0  # Async MongoDB driver
+
+# === LangChain Core ===
+langchain==1.0.3
+langchain_core
+langchain_community
+
+# === LLM Providers (Unified Configuration) ===
+langchain_groq
+langchain_openai
+langchain_mcp_adapters
+litellm
+langchain_anthropic
+langchain_google_genai
+groq>=0.4.0
+cohere>=5.0.0
+
+# === LangGraph Workflow ===
+langgraph==1.0.2
+
+# === MCP Integration ===
+langchain_mcp_adapters
+
+litellm==1.80.5
+sqlalchemy==2.0.44
+
+# === HTTP & Data ===
+requests>=2.31.0
+
+
+nh3==0.3.2
+detect-secrets==0.12.0
+presidio-analyzer==2.2.360
+spacy==3.8.11
+transformers==4.57.3
+# torch==2.9.1
+pymongo==4.15.3
+toposort

@@ -1,0 +1,17 @@
+.env
+deploy/logs/
+deploy/pids
+__pycache__/
+rag/uploads
+*flowchart.json
+*.log
+prompts.csv
+.vscode
+langchain-docs/
+*venv/
+.DS_Store
+.github/copilot-instructions.md
+tests/
+docs/
+*.csv
+backend/contractparseragent/server/generated_flowcharts

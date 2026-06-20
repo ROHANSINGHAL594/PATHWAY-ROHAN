@@ -1,0 +1,48 @@
+{
+  "nodes": [
+    { "id": "filter", "category": "table", "n_inputs": 1, "description": "Filters table rows based on multiple filter conditions with various comparison operations (==, <, <=, >=, >, !=, startswith, endswith, find) applied to column values" },
+    { "id": "group_by", "category": "table", "n_inputs": 1, "description": "Groups table rows by specified columns and applies reducer functions (sum, avg, count, min, max, etc.) to compute aggregate values for each group" },
+    { "id": "json_select", "category": "table", "n_inputs": 1, "description": "Extracts and selects specific properties from JSON column data, creating new columns with typed values (json, str, int, float, bool) from nested JSON structures" },
+    { "id": "flatten", "category": "table", "n_inputs": 1, "description": "Flattens array or nested structures in a specified column, expanding each element into separate rows for denormalization" },
+
+    { "id": "arithmetic", "category": "table", "n_inputs": 1, "description": "Applies arithmetic operations (+, -, *, /, //, %) between two columns and stores the result in a new column." },
+
+    { "id": "comparison", "category": "table", "n_inputs": 1, "description": "Performs comparison operations (==, !=, >, <, >=, <=) between two columns and stores the boolean result in a new column." },
+
+    { "id": "boolean", "category": "table", "n_inputs": 1, "description": "Applies boolean operations (&, |, ^, ~) between columns and stores the result in a new column." },
+
+    { "id": "window_by", "category": "temporal", "n_inputs": 1, "description": "Creates time-based windows (session, sliding, or tumbling) over streaming data grouped by time column and optional instance column, with configurable reducers to aggregate data within each window" },
+    { "id": "join", "category": "table", "n_inputs": 2, "description": "Joins two tables based on equality of specified columns from each table with configurable join mode (inner, left, right, outer) and exactness constraints" },
+    { "id": "asof_now_join", "category": "table", "n_inputs": 2, "description": "Performs an as-of join where rows are matched based on the current processing time, useful for joining streaming data with reference data using latest available values" },
+    { "id": "asof_join", "category": "temporal", "n_inputs": 2, "description": "Performs temporal as-of join between two tables based on time columns, matching each row with the closest row from the other table in a specified direction (backward, forward, nearest) for point-in-time analysis" },
+    { "id": "interval_join", "category": "temporal", "n_inputs": 2, "description": "Joins two tables where time values fall within a specified interval range (lower and upper bounds) for time-based correlation of events" },
+    { "id": "window_join", "category": "temporal", "n_inputs": 2, "description": "Joins two tables within the same time window (session, sliding, or tumbling), matching rows that occur in corresponding time windows for synchronized temporal analysis" },
+
+    { "id": "kafka_write", "category": "io", "n_inputs": 1, "description": "Writes streaming data to Apache Kafka topics in JSON format with configurable Kafka settings for real-time data publishing" },
+    { "id": "redpanda_write", "category": "io", "n_inputs": 1, "description": "Writes streaming data to Redpanda topics in JSON format for Kafka-compatible message streaming" },
+    { "id": "csv_write", "category": "io", "n_inputs": 1, "description": "Writes data to CSV files at the specified filename location for tabular data export" },
+    { "id": "jsonlines_write", "category": "io", "n_inputs": 1, "description": "Writes data to JSON Lines files where each row becomes a JSON object on a separate line for semi-structured data export" },
+    { "id": "postgres_write", "category": "io", "n_inputs": 1, "description": "Writes data to PostgreSQL database tables with primary key management and upsert capabilities for relational database persistence" },
+    { "id": "mysql_write", "category": "io", "n_inputs": 1, "description": "Writes data to MySQL database tables with primary key management and upsert capabilities for MySQL database integration" },
+    { "id": "mongodb_write", "category": "io", "n_inputs": 1, "description": "Writes data to MongoDB collections within a specified database using connection URI for NoSQL document storage" },
+    { "id": "bigquery_write", "category": "io", "n_inputs": 1, "description": "Writes data to Google BigQuery tables using service account credentials with project, dataset, and table configuration for cloud data warehouse loading" },
+    { "id": "elasticsearch_write", "category": "io", "n_inputs": 1, "description": "Writes data to Elasticsearch indices with optional username/password authentication for search and analytics" },
+    { "id": "dynamodb_write", "category": "io", "n_inputs": 1, "description": "Writes data to AWS DynamoDB tables using AWS credentials for NoSQL key-value and document storage" },
+    { "id": "pubsub_write", "category": "io", "n_inputs": 1, "description": "Writes messages to Google Cloud Pub/Sub topics using service account credentials for cloud-native messaging" },
+    { "id": "kinesis_write", "category": "io", "n_inputs": 1, "description": "Writes streaming data to AWS Kinesis streams using AWS credentials for AWS real-time data streaming" },
+    { "id": "nats_write", "category": "io", "n_inputs": 1, "description": "Writes messages to NATS subjects in configurable formats (json, dsv, plaintext, raw) for lightweight message publishing" },
+    { "id": "mqtt_write", "category": "io", "n_inputs": 1, "description": "Writes messages to MQTT broker topics with broker address and topic configuration for IoT device communication" },
+    { "id": "logstash_write", "category": "io", "n_inputs": 1, "description": "Writes data to Logstash endpoint for further processing in the ELK (Elasticsearch, Logstash, Kibana) stack" },
+    { "id": "questdb_write", "category": "io", "n_inputs": 1, "description": "Writes time-series data to QuestDB database with host and port configuration for high-performance time-series storage" },
+
+    { "id": "open_tel_spans_input", "category": "io", "n_inputs": 0, "description": "Reads OpenTelemetry spans from Kafka topic for distributed tracing data" },
+
+    { "id": "open_tel_metrics_input", "category": "io", "n_inputs": 0, "description": "Reads OpenTelemetry metrics from Kafka topic for performance and system metrics" },
+
+    { "id": "open_tel_logs_input", "category": "io", "n_inputs": 0, "description": "Reads OpenTelemetry logs from Kafka topic for application logging data" },
+    
+    { "id": "alert", "category": "action", "n_inputs": 1, "description": "Generates intelligent alerts by processing trigger data with LLM-based analysis, determining alert severity (error, warning, info) and creating contextual alert messages based on configured alert prompts and trigger conditions" },
+    { "id": "rag_node", "category": "rag", "n_inputs": 1, "description": "Builds a complete Retrieval-Augmented Generation (RAG) pipeline that parses documents using Unstructured parser, splits them into chunks with token-based splitting (configurable min/max tokens), generates embeddings using configurable models (Gemini, OpenAI, SentenceTransformer), and creates searchable indices with vector-based (BruteForceKnn) or hybrid (vector + BM25 keyword) retrieval strategies for semantic document search and question-answering" },
+    { "id": "trigger_rca", "category": "agent", "n_inputs": 1, "description": "Triggers root cause analysis (RCA) on SLA metric violations by extracting OpenTelemetry trace identifiers from metric data, correlating them with the pipeline topology that produced the metric, and generating comprehensive natural-language summaries that explain what telemetry entities contributed to the metric breach. Accepts a metric_description parameter describing the monitored condition and automatically identifies semantic origins of trace identifiers through the transformation pipeline for deep diagnostic insights" }
+  ]
+}

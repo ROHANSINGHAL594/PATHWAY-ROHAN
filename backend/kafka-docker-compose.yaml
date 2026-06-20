@@ -1,0 +1,42 @@
+version: '3.8'
+services:
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    hostname: kafka
+    container_name: main_kafka
+    ports:
+      - "9092:9092" # External client port
+      - "9094:9094" # External pipeline port
+      - "9093:9093" # Controller port
+    environment:
+      # KRaft Mode
+      KAFKA_KRAFT_MODE: "true"
+      KAFKA_PROCESS_ROLES: controller,broker
+      KAFKA_NODE_ID: 1
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_CONTROLLER_QUORUM_VOTERS: "1@kafka:9093"
+
+      # Listener config
+      KAFKA_LISTENERS: CONTROLLER://:9093,PLAINTEXT://:9092,PIPELINE://:9094
+      KAFKA_ADVERTISED_LISTENERS: CONTROLLER://kafka:9093,PLAINTEXT://localhost:9092,PIPELINE://host.docker.internal:9094
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PIPELINE:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_DEFAULT_REPLICATION_FACTOR: 1
+      KAFKA_MIN_INSYNC_REPLICAS: 1
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: kafka-ui
+    networks:
+      - opentelemetry-demo
+    ports:
+      - "8081:8080" # Maps Host 8081 -> Container 8080
+    environment:
+      KAFKA_CLUSTERS_0_NAME: Cloud-VM-Kafka
+      # CONNECTIVITY FIX:
+      # Use the internal container name and the internal port (29092)
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: main_kafka:29092
+      DYNAMIC_CONFIG_ENABLED: 'true'

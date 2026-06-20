@@ -1,0 +1,479 @@
+{
+  "nodes": [
+    {
+      "id": "n1",
+      "schema": {
+        "$defs": {
+          "RdKafkaSettings": {
+            "description": "TypedDict for rdkafka configuration settings.\n\nCommon settings:\n- bootstrap.servers: Kafka broker addresses\n- security.protocol: Security protocol (PLAINTEXT, SSL, SASL_SSL, etc.)\n- sasl.mechanism: SASL mechanism (PLAIN, SCRAM-SHA-256, etc.)\n- sasl.username: SASL username\n- sasl.password: SASL password\n- group.id: Consumer group ID\n- auto.offset.reset: Offset reset policy (earliest, latest)",
+            "properties": {
+              "bootstrap_servers": {"title": "Bootstrap Servers", "type": "string"},
+              "security_protocol": {"anyOf": [{"type": "string"}, {"type": "null"}], "title": "Security Protocol"},
+              "sasl_mechanism": {"anyOf": [{"type": "string"}, {"type": "null"}], "title": "Sasl Mechanism"},
+              "sasl_username": {"anyOf": [{"type": "string"}, {"type": "null"}], "title": "Sasl Username"},
+              "sasl_password": {"anyOf": [{"type": "string"}, {"type": "null"}], "title": "Sasl Password"},
+              "group_id": {"anyOf": [{"type": "string"}, {"type": "null"}], "title": "Group Id"},
+              "auto_offset_reset": {"anyOf": [{"type": "string"}, {"type": "null"}], "title": "Auto Offset Reset"}
+            },
+            "title": "RdKafkaSettings",
+            "type": "object"
+          }
+        },
+        "description": "Input node for span data from Kafka.",
+        "properties": {
+          "category": {"const": "open_tel", "default": "open_tel", "title": "Category", "type": "string"},
+          "node_id": {"const": "open_tel_spans_input", "title": "Node Id", "type": "string"},
+          "tool_description": {"default": "", "title": "Tool Description", "type": "string"},
+          "trigger_description": {"default": "", "title": "Trigger Description", "type": "string"},
+          "n_inputs": {"const": 0, "default": 0, "title": "N Inputs", "type": "integer"},
+          "rdkafka_settings": {"$ref": "#/$defs/RdKafkaSettings"},
+          "topic": {"default": "otlp_spans", "title": "Topic", "type": "string"}
+        },
+        "required": ["node_id", "rdkafka_settings"],
+        "title": "OpenTelSpansNode",
+        "type": "object"
+      },
+      "type": "open_tel_spans_input",
+      "position": {"x": 2463.0672087821904, "y": 637.852314533222},
+      "node_id": "open_tel_spans_input",
+      "category": "open_tel",
+      "data": {
+        "ui": {"label": "OpenTelSpansNode Node", "iconUrl": ""},
+        "properties": {
+          "tool_description": "Input node for span data from Kafka",
+          "trigger_description": "",
+          "rdkafka_settings": {"bootstrap_servers": "host.docker.internal:9094"},
+          "topic": "otlp_spans"
+        }
+      },
+      "measured": {"width": 307, "height": 233},
+      "selected": false,
+      "dragging": false
+    },
+    {
+      "id": "n2",
+      "schema": {
+        "$defs": {
+          "Filter": {
+            "properties": {
+              "col": {"title": "Col", "type": "string"},
+              "op": {"enum": ["==", "<", "<=", ">=", ">", "!=", "startswith", "endswith", "find"], "title": "Op", "type": "string"},
+              "value": {"anyOf": [{"type": "integer"}, {"type": "number"}, {"type": "string"}], "title": "Value"}
+            },
+            "required": ["col", "op", "value"],
+            "title": "Filter",
+            "type": "object"
+          }
+        },
+        "properties": {
+          "category": {"const": "table", "title": "Category", "type": "string"},
+          "node_id": {"const": "filter", "title": "Node Id", "type": "string"},
+          "tool_description": {"default": "", "title": "Tool Description", "type": "string"},
+          "trigger_description": {"default": "", "title": "Trigger Description", "type": "string"},
+          "filters": {"items": {"$ref": "#/$defs/Filter"}, "title": "Filters", "type": "array"},
+          "n_inputs": {"const": 1, "default": 1, "title": "N Inputs", "type": "integer"}
+        },
+        "required": ["category", "node_id", "filters"],
+        "title": "FilterNode",
+        "type": "object"
+      },
+      "type": "filter",
+      "position": {"x": 2857.2720063211377, "y": 637.1604297208326},
+      "node_id": "filter",
+      "category": "table",
+      "data": {
+        "ui": {"label": "FilterNode Node", "iconUrl": ""},
+        "properties": {
+          "tool_description": "Health check for payment service",
+          "trigger_description": "",
+          "filters": [{"col": "name", "op": "==", "value": "payment healthcheck"}]
+        }
+      },
+      "measured": {"width": 242, "height": 233},
+      "selected": false,
+      "dragging": false
+    },
+    {
+      "id": "n2_dup_1765039643792",
+      "schema": {
+        "$defs": {
+          "Filter": {
+            "properties": {
+              "col": {"title": "Col", "type": "string"},
+              "op": {"enum": ["==", "<", "<=", ">=", ">", "!=", "startswith", "endswith", "find"], "title": "Op", "type": "string"},
+              "value": {"anyOf": [{"type": "integer"}, {"type": "number"}, {"type": "string"}], "title": "Value"}
+            },
+            "required": ["col", "op", "value"],
+            "title": "Filter",
+            "type": "object"
+          }
+        },
+        "properties": {
+          "category": {"const": "table", "title": "Category", "type": "string"},
+          "node_id": {"const": "filter", "title": "Node Id", "type": "string"},
+          "tool_description": {"default": "", "title": "Tool Description", "type": "string"},
+          "trigger_description": {"default": "", "title": "Trigger Description", "type": "string"},
+          "filters": {"items": {"$ref": "#/$defs/Filter"}, "title": "Filters", "type": "array"},
+          "n_inputs": {"const": 1, "default": 1, "title": "N Inputs", "type": "integer"}
+        },
+        "required": ["category", "node_id", "filters"],
+        "title": "FilterNode",
+        "type": "object"
+      },
+      "type": "filter",
+      "position": {"x": 3284.6630887305164, "y": 638.8719955466628},
+      "node_id": "filter",
+      "category": "table",
+      "data": {
+        "ui": {"label": "FilterNode Node", "iconUrl": ""},
+        "properties": {
+          "tool_description": "Filter failed healthchecks",
+          "trigger_description": "",
+          "filters": [{"col": "status_code", "op": "==", "value": 2}]
+        }
+      },
+      "measured": {"width": 242, "height": 233},
+      "selected": false,
+      "dragging": false
+    },
+    {
+      "id": "n4",
+      "schema": {
+        "$defs": {
+          "CommonBehaviour": {
+            "properties": {
+              "delay": {"anyOf": [{"type": "integer"}, {"type": "number"}, {"format": "duration", "type": "string"}, {"type": "null"}], "title": "Delay"},
+              "cutoff": {"anyOf": [{"type": "integer"}, {"type": "number"}, {"format": "duration", "type": "string"}, {"type": "null"}], "title": "Cutoff"},
+              "keep_results": {"title": "Keep Results", "type": "boolean"}
+            },
+            "required": ["delay", "cutoff", "keep_results"],
+            "title": "CommonBehaviour",
+            "type": "object"
+          },
+          "ReducerDict": {
+            "properties": {
+              "col": {"title": "Col", "type": "string"},
+              "reducer": {"enum": ["any", "argmax", "argmin", "avg", "count", "count_distinct", "count_distinct_approximate", "earliest", "latest", "max", "min", "ndarray", "sorted_tuple", "stateful_many", "stateful_single", "sum", "tuple", "unique", "p90", "p95", "p99"], "title": "Reducer", "type": "string"},
+              "new_col": {"title": "New Col", "type": "string"}
+            },
+            "required": ["col", "reducer", "new_col"],
+            "title": "ReducerDict",
+            "type": "object"
+          },
+          "Tumbling": {
+            "properties": {
+              "duration": {"anyOf": [{"type": "integer"}, {"type": "number"}, {"format": "duration", "type": "string"}, {"type": "null"}], "title": "Duration"},
+              "origin": {"anyOf": [{"type": "integer"}, {"type": "number"}, {"format": "date-time", "type": "string"}, {"type": "null"}], "title": "Origin"},
+              "window_type": {"const": "tumbling", "title": "Window Type", "type": "string"}
+            },
+            "required": ["duration", "origin", "window_type"],
+            "title": "Tumbling",
+            "type": "object"
+          }
+        },
+        "properties": {
+          "category": {"const": "temporal", "title": "Category", "type": "string"},
+          "node_id": {"const": "window_by", "title": "Node Id", "type": "string"},
+          "tool_description": {"default": "", "title": "Tool Description", "type": "string"},
+          "trigger_description": {"default": "", "title": "Trigger Description", "type": "string"},
+          "n_inputs": {"const": 1, "default": 1, "title": "N Inputs", "type": "integer"},
+          "time_col": {"title": "Time Col", "type": "string"},
+          "instance_col": {"title": "Instance Col", "type": "string"},
+          "window": {"anyOf": [{"$ref": "#/$defs/Tumbling"}], "title": "Window"},
+          "behaviour": {"$ref": "#/$defs/CommonBehaviour"},
+          "reducers": {"items": {"$ref": "#/$defs/ReducerDict"}, "title": "Reducers", "type": "array"}
+        },
+        "required": ["category", "node_id", "time_col", "window", "reducers"],
+        "title": "WindowByNode",
+        "type": "object"
+      },
+      "type": "window_by",
+      "position": {"x": 3620.7096852412665, "y": 638.1832479154233},
+      "node_id": "window_by",
+      "category": "temporal",
+      "data": {
+        "ui": {"label": "WindowByNode Node", "iconUrl": ""},
+        "properties": {
+          "tool_description": "Window of 30 seconds which counts number of failed requests",
+          "trigger_description": "",
+          "time_col": "start_time_unix_nano",
+          "window": {"duration": 30000000000, "origin": 1.7231239124929122e+21, "window_type": "tumbling"},
+          "reducers": [{"col": "_open_tel_trace_id", "reducer": "count", "new_col": "n_failed_healthchecks"}]
+        }
+      },
+      "measured": {"width": 350, "height": 233},
+      "selected": false,
+      "dragging": false
+    },
+    {
+      "id": "n6",
+      "schema": {
+        "properties": {
+          "category": {"const": "table", "title": "Category", "type": "string"},
+          "node_id": {"const": "join", "title": "Node Id", "type": "string"},
+          "tool_description": {"default": "", "title": "Tool Description", "type": "string"},
+          "trigger_description": {"default": "", "title": "Trigger Description", "type": "string"},
+          "n_inputs": {"const": 2, "default": 2, "title": "N Inputs", "type": "integer"},
+          "on": {"items": {"maxItems": 2, "minItems": 2, "prefixItems": [{"type": "string"}, {"type": "string"}], "type": "array"}, "title": "On", "type": "array"},
+          "how": {"enum": ["left", "right", "inner", "outer"], "title": "How", "type": "string"},
+          "left_exactly_once": {"default": false, "title": "Left Exactly Once", "type": "boolean"},
+          "right_exactly_once": {"default": false, "title": "Right Exactly Once", "type": "boolean"}
+        },
+        "required": ["category", "node_id", "how"],
+        "title": "JoinNode",
+        "type": "object"
+      },
+      "type": "join",
+      "position": {"x": 4126.0139441031615, "y": 675.829647711508},
+      "node_id": "join",
+      "category": "table",
+      "data": {
+        "ui": {"label": "JoinNode Node", "iconUrl": ""},
+        "properties": {
+          "tool_description": "Joins based on _pw_window_start",
+          "trigger_description": "",
+          "on": [],
+          "how": "inner",
+          "left_exactly_once": false,
+          "right_exactly_once": false
+        }
+      },
+      "measured": {"width": 278, "height": 233},
+      "selected": false,
+      "dragging": false
+    },
+    {
+      "id": "n7",
+      "schema": {
+        "properties": {
+          "category": {"const": "table", "title": "Category", "type": "string"},
+          "node_id": {"const": "arithmetic", "title": "Node Id", "type": "string"},
+          "tool_description": {"default": "", "title": "Tool Description", "type": "string"},
+          "trigger_description": {"default": "", "title": "Trigger Description", "type": "string"},
+          "col_a": {"title": "Col A", "type": "string"},
+          "col_b": {"title": "Col B", "type": "string"},
+          "operator": {"enum": ["+", "-", "*", "/", "//", "%", "**"], "title": "Operator", "type": "string"},
+          "new_col": {"title": "New Col", "type": "string"},
+          "n_inputs": {"const": 1, "default": 1, "title": "N Inputs", "type": "integer"}
+        },
+        "required": ["category", "node_id", "col_a", "col_b", "operator", "new_col"],
+        "title": "ArithmeticNode",
+        "type": "object"
+      },
+      "type": "arithmetic",
+      "position": {"x": 4492.68223112471, "y": 676.4246714075853},
+      "node_id": "arithmetic",
+      "category": "table",
+      "data": {
+        "ui": {"label": "ArithmeticNode Node", "iconUrl": ""},
+        "properties": {
+          "tool_description": "Compute Downtime",
+          "trigger_description": "",
+          "col_a": "_pw_left_n_failed_healthchecks",
+          "col_b": "_pw_right_n_healthchecks",
+          "operator": "/",
+          "new_col": "downtime_percentage"
+        }
+      },
+      "measured": {"width": 271, "height": 233},
+      "selected": false,
+      "dragging": false
+    },
+    {
+      "id": "n8",
+      "schema": {
+        "$defs": {
+          "Filter": {
+            "properties": {
+              "col": {"title": "Col", "type": "string"},
+              "op": {"enum": ["==", "<", "<=", ">=", ">", "!=", "startswith", "endswith", "find"], "title": "Op", "type": "string"},
+              "value": {"anyOf": [{"type": "integer"}, {"type": "number"}, {"type": "string"}], "title": "Value"}
+            },
+            "required": ["col", "op", "value"],
+            "title": "Filter",
+            "type": "object"
+          }
+        },
+        "properties": {
+          "category": {"const": "table", "title": "Category", "type": "string"},
+          "node_id": {"const": "filter", "title": "Node Id", "type": "string"},
+          "tool_description": {"default": "", "title": "Tool Description", "type": "string"},
+          "trigger_description": {"default": "", "title": "Trigger Description", "type": "string"},
+          "filters": {"items": {"$ref": "#/$defs/Filter"}, "title": "Filters", "type": "array"},
+          "n_inputs": {"const": 1, "default": 1, "title": "N Inputs", "type": "integer"}
+        },
+        "required": ["category", "node_id", "filters"],
+        "title": "FilterNode",
+        "type": "object"
+      },
+      "type": "filter",
+      "position": {"x": 4866.468293239113, "y": 677.0317742947468},
+      "node_id": "filter",
+      "category": "table",
+      "data": {
+        "ui": {"label": "FilterNode Node", "iconUrl": ""},
+        "properties": {
+          "tool_description": "Filter Downtime < 1%",
+          "trigger_description": "Downtime percentage of payment service over 30 seconds was > 1%",
+          "filters": [{"col": "downtime_percentage", "op": "<", "value": 0.01}]
+        }
+      },
+      "measured": {"width": 350, "height": 233},
+      "selected": false,
+      "dragging": false
+    },
+    {
+      "id": "n9",
+      "schema": {
+        "properties": {
+          "category": {"const": "agent", "title": "Category", "type": "string"},
+          "node_id": {"const": "trigger_rca", "title": "Node Id", "type": "string"},
+          "tool_description": {"default": "", "title": "Tool Description", "type": "string"},
+          "trigger_description": {"default": "", "title": "Trigger Description", "type": "string"},
+          "n_inputs": {"const": 1, "default": 1, "title": "N Inputs", "type": "integer"},
+          "metric_description": {"title": "Metric Description", "type": "string"}
+        },
+        "required": ["category", "node_id", "metric_description"],
+        "title": "TriggerRCANode",
+        "type": "object"
+      },
+      "type": "trigger_rca",
+      "position": {"x": 5327.442156111168, "y": 674.9098202536222},
+      "node_id": "trigger_rca",
+      "category": "agent",
+      "data": {
+        "ui": {"label": "TriggerRCANode Node", "iconUrl": ""},
+        "properties": {
+          "tool_description": "Triggers root cause analysis",
+          "trigger_description": "",
+          "metric_description": "Downtime percentage of payment service over 30 seconds must be < 1%"
+        }
+      },
+      "measured": {"width": 350, "height": 233},
+      "selected": false,
+      "dragging": false
+    },
+    {
+      "id": "n10",
+      "schema": {
+        "additionalProperties": true,
+        "properties": {
+          "category": {"const": "action", "title": "Category", "type": "string"},
+          "node_id": {"const": "alert", "title": "Node Id", "type": "string"},
+          "tool_description": {"default": "", "title": "Tool Description", "type": "string"},
+          "trigger_description": {"default": "", "title": "Trigger Description", "type": "string"},
+          "alert_prompt": {"title": "Alert Prompt", "type": "string"},
+          "n_inputs": {"const": 1, "default": 1, "title": "N Inputs", "type": "integer"}
+        },
+        "required": ["category", "node_id", "alert_prompt"],
+        "title": "AlertNode",
+        "type": "object"
+      },
+      "type": "alert",
+      "position": {"x": 5325.356214054077, "y": 954.2689503866968},
+      "node_id": "alert",
+      "category": "action",
+      "data": {
+        "ui": {"label": "AlertNode Node", "iconUrl": ""},
+        "properties": {
+          "tool_description": "Alters if metric breached",
+          "trigger_description": "",
+          "alert_prompt": "Warning! metric breached"
+        }
+      },
+      "measured": {"width": 234, "height": 233},
+      "selected": false,
+      "dragging": false
+    },
+    {
+      "id": "n4_dup_1765039669808",
+      "schema": {
+        "$defs": {
+          "CommonBehaviour": {
+            "properties": {
+              "delay": {"anyOf": [{"type": "integer"}, {"type": "number"}, {"format": "duration", "type": "string"}, {"type": "null"}], "title": "Delay"},
+              "cutoff": {"anyOf": [{"type": "integer"}, {"type": "number"}, {"format": "duration", "type": "string"}, {"type": "null"}], "title": "Cutoff"},
+              "keep_results": {"title": "Keep Results", "type": "boolean"}
+            },
+            "required": ["delay", "cutoff", "keep_results"],
+            "title": "CommonBehaviour",
+            "type": "object"
+          },
+          "ReducerDict": {
+            "properties": {
+              "col": {"title": "Col", "type": "string"},
+              "reducer": {"enum": ["any", "argmax", "argmin", "avg", "count", "count_distinct", "count_distinct_approximate", "earliest", "latest", "max", "min", "ndarray", "sorted_tuple", "stateful_many", "stateful_single", "sum", "tuple", "unique", "p90", "p95", "p99"], "title": "Reducer", "type": "string"},
+              "new_col": {"title": "New Col", "type": "string"}
+            },
+            "required": ["col", "reducer", "new_col"],
+            "title": "ReducerDict",
+            "type": "object"
+          },
+          "Tumbling": {
+            "properties": {
+              "duration": {"anyOf": [{"type": "integer"}, {"type": "number"}, {"format": "duration", "type": "string"}, {"type": "null"}], "title": "Duration"},
+              "origin": {"anyOf": [{"type": "integer"}, {"type": "number"}, {"format": "date-time", "type": "string"}, {"type": "null"}], "title": "Origin"},
+              "window_type": {"const": "tumbling", "title": "Window Type", "type": "string"}
+            },
+            "required": ["duration", "origin", "window_type"],
+            "title": "Tumbling",
+            "type": "object"
+          }
+        },
+        "properties": {
+          "category": {"const": "temporal", "title": "Category", "type": "string"},
+          "node_id": {"const": "window_by", "title": "Node Id", "type": "string"},
+          "tool_description": {"default": "", "title": "Tool Description", "type": "string"},
+          "trigger_description": {"default": "", "title": "Trigger Description", "type": "string"},
+          "n_inputs": {"const": 1, "default": 1, "title": "N Inputs", "type": "integer"},
+          "time_col": {"title": "Time Col", "type": "string"},
+          "instance_col": {"title": "Instance Col", "type": "string"},
+          "window": {"anyOf": [{"$ref": "#/$defs/Tumbling"}], "title": "Window"},
+          "behaviour": {"$ref": "#/$defs/CommonBehaviour"},
+          "reducers": {"items": {"$ref": "#/$defs/ReducerDict"}, "title": "Reducers", "type": "array"}
+        },
+        "required": ["category", "node_id", "time_col", "window", "reducers"],
+        "title": "WindowByNode",
+        "type": "object"
+      },
+      "type": "window_by",
+      "position": {"x": 3287.189073749108, "y": 930.0646093342052},
+      "node_id": "window_by",
+      "category": "temporal",
+      "data": {
+        "ui": {"label": "WindowByNode Node", "iconUrl": ""},
+        "properties": {
+          "tool_description": "Window of 30 seconds which counts number of total requests",
+          "trigger_description": "",
+          "time_col": "start_time_unix_nano",
+          "window": {"duration": 30000000000, "origin": 1.7231239124929122e+21, "window_type": "tumbling"},
+          "reducers": [{"col": "_open_tel_trace_id", "reducer": "count", "new_col": "n_healthchecks"}]
+        }
+      },
+      "measured": {"width": 350, "height": 233},
+      "selected": false,
+      "dragging": false
+    }
+  ],
+  "edges": [
+    {"source": "n1", "sourceHandle": "out", "target": "n2", "targetHandle": "in_0", "id": "n1-n2-1765039731841", "animated": true, "selected": false, "style": {"stroke": "#b1b1b7", "strokeWidth": 2}},
+    {"source": "n2", "sourceHandle": "out", "target": "n2_dup_1765039643792", "targetHandle": "in_0", "id": "n2-n2_dup_1765039643792-1765039734358", "animated": true, "selected": false, "style": {"stroke": "#b1b1b7", "strokeWidth": 2}},
+    {"source": "n2_dup_1765039643792", "sourceHandle": "out", "target": "n4", "targetHandle": "in_0", "id": "n2_dup_1765039643792-n4-1765039740325", "animated": true, "selected": false, "style": {"stroke": "#b1b1b7", "strokeWidth": 2}},
+    {"source": "n4", "sourceHandle": "out", "target": "n6", "targetHandle": "in_0", "id": "n4-n6-1765039743592", "animated": true, "selected": false, "style": {"stroke": "#b1b1b7", "strokeWidth": 2}},
+    {"source": "n6", "sourceHandle": "out", "target": "n7", "targetHandle": "in_0", "id": "n6-n7-1765039781458", "animated": true, "selected": false, "style": {"stroke": "#b1b1b7", "strokeWidth": 2}},
+    {"source": "n7", "sourceHandle": "out", "target": "n8", "targetHandle": "in_0", "id": "n7-n8-1765039784208", "animated": true, "selected": false, "style": {"stroke": "#b1b1b7", "strokeWidth": 2}},
+    {"source": "n8", "sourceHandle": "out", "target": "n9", "targetHandle": "in_0", "id": "n8-n9-1765039797646", "animated": true, "selected": false, "style": {"stroke": "#b1b1b7", "strokeWidth": 2}},
+    {"source": "n8", "sourceHandle": "out", "target": "n10", "targetHandle": "in_0", "id": "n8-n10-1765039814892", "animated": true, "selected": false, "style": {"stroke": "#b1b1b7", "strokeWidth": 2}},
+    {"source": "n2", "sourceHandle": "out", "target": "n4_dup_1765039669808", "targetHandle": "in_0", "id": "n2-n4_dup_1765039669808-1765039738359", "animated": true, "selected": false, "style": {"stroke": "#b1b1b7", "strokeWidth": 2}},
+    {"source": "n4_dup_1765039669808", "sourceHandle": "out", "target": "n6", "targetHandle": "in_1", "id": "n4_dup_1765039669808-n6-1765039746875", "animated": true, "selected": false, "style": {"stroke": "#b1b1b7", "strokeWidth": 2}}
+  ],
+  "viewport": {"x": -1159.3000351200717, "y": 31.876160688560844, "zoom": 0.5037816702442691},
+  "metadata": {
+    "pipelineName": "Pipeline 69345280b071ea88a0db03a7",
+    "pipelineId": "69345280b071ea88a0db03a7",
+    "versionId": "69345fad5d160a95eb0f23d3",
+    "exportedAt": "2025-12-06T17:20:19.114Z",
+    "exportedBy": "1"
+  }
+}
+

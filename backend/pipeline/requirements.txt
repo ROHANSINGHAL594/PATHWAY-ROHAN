@@ -1,0 +1,17 @@
+fastapi==0.120.4
+motor==3.7.1
+pydantic==2.12.3
+python-dotenv==1.1.1
+toposort==1.10
+uvicorn==0.38.0
+psycopg2-binary==2.9.11
+sqlalchemy==2.0.44
+setuptools<81
+httpx
+tdigest
+numpy
+river
+psutil
+torch
+pathway
+pymongo==4.15.3

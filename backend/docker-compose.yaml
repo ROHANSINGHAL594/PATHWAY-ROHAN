@@ -1,0 +1,82 @@
+services:
+  pipeline:
+    build: ./pipeline
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: db
+      POSTGRES_USER: ${_POSTGRES_WRITE_USER}
+      POSTGRES_PASSWORD: ${_POSTGRES_WRITE_PASSWORD}
+      PIPELINE_ID: ${_PIPELINE_ID}
+      FLOWCHART_FILE: "flowchart.json"
+      AGENTIC_URL: http://agentic:5333
+      ERROR_INDEXING_HOST: "0.0.0.0"
+      ERROR_INDEXING_PORT: "11111"
+      ERRORS_JSON_PATH: "/errors.json"
+      MONGO_URI: ${MONGO_URI}
+      MONGODB_URI: ${MONGO_URI}
+      MONGODB_DATABASE: "runbook"
+      EMBEDDING_MODEL: "models/text-embedding-004"
+      MONGO_DB: ${MONGO_DB}
+      MONGO_COLLECTION: ${MONGO_COLLECTION}
+      LOGS_COLLECTION: ${LOGS_COLLECTION}
+      NOTIFICATION_COLLECTION: ${NOTIFICATION_COLLECTION}
+      RCA_COLLECTION: ${RCA_COLLECTION:-rca_events}
+    volumes:
+      - ./pipeline:/app/pipeline:ro
+      - ./lib:/app/lib:ro
+      - ./postgres_util.py:/app/postgres_util.py:ro
+      - ./pipeline/.env:/app/.env:ro
+  agentic:
+    build: ./agentic
+    depends_on:
+      pipeline:
+        condition: service_started
+      postgres:
+        condition: service_healthy
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: db
+      POSTGRES_PASSWORD: ${_POSTGRES_WRITE_PASSWORD}
+      POSTGRES_USER: ${_POSTGRES_WRITE_USER}
+      DATABASE_URL: postgresql+asyncpg://${_POSTGRES_WRITE_USER}:${_POSTGRES_WRITE_PASSWORD}@postgres:5432/db
+      PATHWAY_API_URL: http://pipeline:11111
+      MONGO_URI: ${MONGO_URI}
+      MONGO_DB: ${MONGO_DB}
+      MONGO_COLLECTION: ${MONGO_COLLECTION}
+      NOTIFICATION_COLLECTION: ${NOTIFICATION_COLLECTION}
+      LOGS_COLLECTION: ${LOGS_COLLECTION}
+      PIPELINE_ID: ${_PIPELINE_ID}
+    ports:
+      - "5333:5333"
+    volumes:
+      - ./agentic:/app/agentic:ro
+      - ./lib:/app/lib:ro
+      - ./postgres_util.py:/app/postgres_util.py:ro
+      - ./agentic/.env:/app/.env:ro
+  postgres:
+    build: ./postgres
+    environment:
+      POSTGRES_DB: db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_READ_USER: ${_POSTGRES_READ_USER}
+      POSTGRES_WRITE_USER: ${_POSTGRES_WRITE_USER}
+      POSTGRES_READ_PASSWORD: ${_POSTGRES_READ_PASSWORD}
+      POSTGRES_WRITE_PASSWORD: ${_POSTGRES_WRITE_PASSWORD}
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d db && psql -U admin -d db -tAc \"SELECT 1 FROM pg_roles WHERE rolname = 'pipeline_output_user'\" | grep -q 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+    

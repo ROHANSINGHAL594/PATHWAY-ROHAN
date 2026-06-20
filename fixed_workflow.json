@@ -1,0 +1,138 @@
+{
+  "nodes": [
+    {
+      "id": "n0",
+      "node_id": "open_tel_spans_input",
+      "category": "io",
+      "data": {
+        "properties": {
+          "topic": "otlp_spans",
+          "rdkafka_settings": {
+            "bootstrap_servers": "host.docker.internal:9094",
+            "group_id": "test_group_spans"
+          }
+        }
+      }
+    },
+    {
+      "id": "n1",
+      "node_id": "filter",
+      "category": "table",
+      "data": {
+        "properties": {
+          "name": "Filter spans associated with checkout requests",
+          "filters": [
+            {
+              "col": "name",
+              "op": "==",
+              "value": "POST /api/checkout"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "n2",
+      "node_id": "filter",
+      "category": "table",
+      "data": {
+        "properties": {
+          "name": "Filter failed checkouts",
+          "filters": [
+            {
+              "col": "status_code",
+              "op": "==",
+              "value": 2
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "n3",
+      "node_id": "window_by",
+      "category": "temporal",
+      "data": {
+        "properties": {
+          "name": "Window of 30 seconds which counts number of failed checkout requests",
+          "time_col": "start_time_unix_nano",
+          "window": {
+            "window_type": "tumbling",
+            "duration": 30000000000,
+            "origin": null
+          },
+          "reducers": [
+            {
+              "col": "_open_tel_trace_id",
+              "reducer": "count",
+              "new_col": "n_failed_checkouts"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "n4",
+      "node_id": "filter",
+      "category": "table",
+      "data": {
+        "properties": {
+          "name": "Filters windows where number of failed checkout requests was greater than equal to 5",
+          "filters": [
+            {
+              "col": "n_failed_checkouts",
+              "op": ">=",
+              "value": 5
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "n5",
+      "node_id": "trigger_rca",
+      "category": "agent",
+      "data": {
+        "properties": {
+          "metric_description": "Number of failed checkout requests in a window of 30 seconds must be < 5"
+        }
+      }
+    },
+    {
+      "id": "n6",
+      "node_id": "open_tel_logs_input",
+      "category": "io",
+      "data": {
+        "properties": {
+          "topic": "otlp_logs",
+          "rdkafka_settings": {
+            "bootstrap_servers": "host.docker.internal:9094",
+            "group_id": "test_group_logs"
+          }
+        }
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "n0",
+      "target": "n1"
+    },
+    {
+      "source": "n1",
+      "target": "n2"
+    },
+    {
+      "source": "n2",
+      "target": "n3"
+    },
+    {
+      "source": "n3",
+      "target": "n4"
+    },
+    {
+      "source": "n4",
+      "target": "n5"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+# Python caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+.venv/
+
+# System files
+.DS_Store
+
+# IDE files
+.vscode/
+.idea/
+
+
+.env.template
+# Build artifacts
+dist/
+build/
+*.log
+
+# Docker related files
+Dockerfile
+docker-compose.yaml
+
+
+

@@ -1,0 +1,459 @@
+/* Developer Dashboard Styles - Layout and Positioning Only */
+
+/* Main Container */
+.below-sidebar-container {
+  height: 100vh;
+  display: flex;
+  overflow: hidden; /* Prevent scrolling at the top level */
+  margin-left: 64px; /* Account for sidebar width */
+}
+
+@media (max-width: 600px) {
+  .below-sidebar-container {
+    margin-left: 64px; /* Keep sidebar margin even on mobile */
+  }
+}
+
+/* Main Content Area */
+.overview-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow-y: auto; /* Allow vertical scrolling for the main content */
+}
+
+/* Top Bar */
+.overview-topbar {
+  padding: 16px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+@media (max-width: 900px) {
+  .overview-topbar {
+    padding: 16px;
+  }
+}
+
+.overview-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.overview-search-input {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  width: 300px;
+}
+
+.overview-search-input:focus {
+  outline: none;
+}
+
+@media (max-width: 900px) {
+  .overview-search-input {
+    width: 250px;
+  }
+}
+
+@media (max-width: 600px) {
+  .overview-search-input {
+    width: 150px;
+  }
+}
+
+.overview-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.overview-notification-btn {
+  width: 44px;
+  height: 44px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.overview-notification-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  opacity: 0.5;
+  animation: pulse-notification 2s infinite;
+}
+
+@keyframes pulse-notification {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+.overview-notification-btn:hover {
+  transform: scale(1.05);
+}
+
+.overview-notification-btn:hover::before {
+  animation: none;
+}
+
+.overview-notification-btn .MuiBadge-badge {
+  font-weight: 700;
+  font-size: 0.75rem;
+  min-width: 20px;
+  height: 20px;
+  z-index: 1;
+}
+
+.overview-workflows-title {
+  font-weight: 700;
+}
+
+.overview-user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Dashboard Content Area */
+.overview-content-wrapper {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  gap: 0; /* Ensure no gap between sections */
+}
+
+/* Left Content */
+.overview-left-content {
+  flex: 1 1 auto;
+  min-width: 0; /* Prevent flex item from overflowing */
+  max-width: calc(100% - 300px); /* Ensure space for highlights panel */
+  padding: 32px;
+  overflow-y: auto;
+  overflow-x: hidden; /* Prevent horizontal overflow */
+  box-sizing: border-box;
+}
+
+/* For screens above 1600px */
+@media (min-width: 1601px) and (max-width: 2149px) {
+  .overview-left-content {
+    max-width: calc(70% - 1px); /* 70% for content, 30% for highlights, minus border */
+  }
+}
+
+/* For extra large screens above 2150px */
+@media (min-width: 2150px) {
+  .overview-left-content {
+    max-width: calc(70% - 1px); /* 70% for content, 30% for highlights, minus border */
+  }
+}
+
+/* For medium screens (1200-1600px) - match the fixed 350px highlights */
+@media (max-width: 1600px) and (min-width: 901px) {
+  .overview-left-content {
+    max-width: calc(100% - 350px - 1px); /* Full width minus highlights (350px) minus border */
+  }
+}
+
+@media (max-width: 900px) {
+  .overview-left-content {
+    padding: 16px;
+    max-width: 100%; /* Take full width when highlights are hidden */
+  }
+}
+
+/* Section 1 & 2: Overview and KPIs Row */
+.overview-overview-kpi-row {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  margin-bottom: 24px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden; /* Prevent child overflow */
+}
+
+/* Extra large screens: Single row with overview + 4 KPIs */
+@media (min-width: 2150px) {
+  .overview-overview-kpi-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .overview-overview-kpi-row {
+    flex-direction: column;
+  }
+}
+
+/* Section 1: Overview Section */
+.overview-overview-wrapper {
+  flex: 0 0 540px;
+  min-width: 540px;
+  max-width: 540px;
+  box-sizing: border-box;
+}
+
+/* Extra large screens: Overview takes 1 column in 5-column grid */
+@media (min-width: 2150px) {
+  .overview-overview-wrapper {
+    flex: unset;
+    min-width: unset;
+    max-width: unset;
+    grid-column: span 1;
+  }
+}
+
+/* Adjust for medium screens (1200-1600px) */
+@media (max-width: 1600px) and (min-width: 1201px) {
+  .overview-overview-wrapper {
+    flex: 0 0 45%;
+    min-width: 400px;
+    max-width: 540px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .overview-overview-wrapper {
+    flex: 1 1 100%;
+    min-width: auto;
+    max-width: 100%;
+  }
+}
+
+/* Vertical Divider */
+.overview-vertical-divider {
+  width: 1px;
+  flex-shrink: 0;
+}
+
+/* Hide divider on extra large screens (single row layout) */
+@media (min-width: 2150px) {
+  .overview-vertical-divider {
+    display: none;
+  }
+}
+
+@media (max-width: 1200px) {
+  .overview-vertical-divider {
+    display: none;
+  }
+}
+
+/* Section 2: KPI Cards Grid */
+.overview-kpi-grid {
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 16px;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Extra large screens: KPI cards span 4 columns in single row */
+@media (min-width: 2150px) {
+  .overview-kpi-grid {
+    grid-column: span 4;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr;
+    aspect-ratio: unset;
+    flex: unset;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 2149px) {
+  .overview-kpi-grid {
+    aspect-ratio: 2 / 2;
+  }
+}
+
+.overview-kpi-item {
+  min-height: 150px;
+}
+
+@media (min-width: 900px) {
+  .overview-kpi-item {
+    aspect-ratio: 1 / 1;
+    min-height: 180px;
+  }
+}
+
+/* Extra large screens: KPI items in single row */
+@media (min-width: 2150px) {
+  .overview-kpi-item {
+    aspect-ratio: unset;
+    min-height: 200px;
+    height: 100%;
+  }
+}
+
+/* Horizontal Divider */
+.overview-horizontal-divider {
+  height: 1px;
+  margin-bottom: 24px;
+  background-color: transparent;
+}
+
+.overview-workflows-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.overview-more-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.overview-more-icon {
+  font-size: 18px;
+}
+
+/* Section 3: Workflows Section */
+.overview-workflows-section {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.overview-workflows-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Section 4: Right Highlights Panel */
+.overview-highlights-panel {
+  flex: 0 0 30%; /* Fixed flex basis at 30% */
+  width: 30%; /* Dynamic width - 30% of screen */
+  min-width: 300px;
+  max-width: 540px;
+  flex-shrink: 0;
+  overflow-y: auto; /* Allow vertical scrolling for the highlights panel */
+  overflow-x: hidden; /* Prevent horizontal overflow */
+  box-sizing: border-box;
+}
+
+/* Extra large screens (>2150px) - dynamic 30% width */
+@media (min-width: 2150px) {
+  .overview-highlights-panel {
+    flex: 0 0 30%;
+    width: 30%;
+    min-width: 400px;
+    max-width: 600px;
+  }
+}
+
+/* Optimize for large screens (1600-2149px) */
+@media (max-width: 2149px) and (min-width: 1601px) {
+  .overview-highlights-panel {
+    flex: 0 0 30%;
+    width: 30%;
+    min-width: 350px;
+    max-width: 540px;
+  }
+}
+
+/* Optimize for medium screens (1200-1600px) */
+@media (max-width: 1600px) and (min-width: 1201px) {
+  .overview-highlights-panel {
+    flex: 0 0 350px;
+    width: 350px;
+    min-width: 350px;
+    max-width: 350px;
+  }
+}
+
+/* Hide highlights panel on tablet and below */
+@media (max-width: 900px) {
+  .overview-highlights-panel {
+    display: none;
+  }
+}
+
+/* Mobile Highlights Drawer */
+.overview-drawer-header {
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+/* Drawer Paper Styles */
+.overview-drawer .MuiDrawer-paper {
+  width: 100%;
+}
+
+@media (min-width: 600px) {
+  .overview-drawer .MuiDrawer-paper {
+    width: 400px;
+  }
+}
+
+.overview-drawer-title {
+  font-weight: 700;
+}
+
+/* Floating Highlights Button for Mobile */
+.overview-highlights-fab {
+  position: fixed !important;
+  bottom: 24px !important;
+  left: 88px !important; /* 64px sidebar + 24px padding */
+  z-index: 1000 !important;
+  display: none !important;
+}
+
+/* Show FAB only on tablet and below */
+@media (max-width: 900px) {
+  .overview-highlights-fab {
+    display: flex !important;
+  }
+}
+
+/* Mobile Highlights Drawer - covers 80% of screen */
+@media (max-width: 900px) {
+  .overview-drawer .MuiDrawer-paper {
+    width: 80% !important;
+  }
+}

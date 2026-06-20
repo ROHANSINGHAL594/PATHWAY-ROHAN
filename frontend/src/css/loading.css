@@ -1,0 +1,16 @@
+.loading-bar-indicator {
+  animation: loading-slide 1.5s ease-in-out infinite;
+}
+
+@keyframes loading-slide {
+  0% {
+    left: 0;
+  }
+  50% {
+    left: calc(100% - 4rem);
+  }
+  100% {
+    left: 0;
+  }
+}
+

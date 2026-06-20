@@ -1,0 +1,268 @@
+/* New Project Modal Styles - Figma Design */
+/* Design specifications from Figma:
+   - Dialog: borderRadius 24px, Elevation/20 shadow
+   - Header: padding 20px 40px, H6_bold (21px, 700, 32px line-height)
+   - Search: 355px width, 36px height, filled variant #EBF2F5
+   - Template cards: 355px width, 200px image height, 16px padding
+   - Content: 40px horizontal padding, 40px gap between sections
+   - Section title (SLA): H5_medium (24px, 500, 36px line-height)
+*/
+
+/* Header */
+.new-project-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+  border-bottom: none;
+  background-color: var(--aurora-palette-background-paper);
+}
+
+.new-project-title {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-size: 21px !important;
+  font-weight: 700 !important;
+  line-height: 32px !important;
+  color: var(--aurora-palette-text-primary) !important;
+}
+
+.new-project-close-btn {
+  color: var(--aurora-palette-text-secondary) !important;
+  width: 32px !important;
+  height: 32px !important;
+}
+
+.new-project-close-btn:hover {
+  background-color: var(--aurora-palette-action-hover) !important;
+}
+
+/* Content */
+.new-project-content {
+  padding: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 40px !important;
+}
+
+/* Search Row */
+.new-project-search-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+  border-bottom: 1px solid var(--aurora-palette-divider);
+}
+
+.new-project-search {
+  width: 355px;
+}
+
+.new-project-search .MuiFilledInput-root {
+  background-color: var(--aurora-palette-input-filled-enabledFill, #ebf2f5);
+  border-radius: 8px;
+  height: 36px;
+  min-height: 36px;
+}
+
+.new-project-search .MuiFilledInput-root:hover {
+  background-color: var(--aurora-palette-input-filled-enabledFill, #ebf2f5);
+}
+
+.new-project-search .MuiFilledInput-root.Mui-focused {
+  background-color: var(--aurora-palette-input-filled-enabledFill, #ebf2f5);
+}
+
+.new-project-search .MuiFilledInput-input {
+  padding: 0 16px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  color: var(--aurora-palette-text-primary);
+}
+
+.new-project-search .MuiFilledInput-input::placeholder {
+  color: var(--aurora-palette-text-secondary);
+  opacity: 1;
+}
+
+.new-project-search .MuiInputAdornment-root {
+  margin-top: 0 !important;
+  margin-right: 8px;
+}
+
+.new-project-filter-btn {
+  color: var(--aurora-palette-text-primary) !important;
+  text-transform: none !important;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  line-height: 18px !important;
+  padding: 13px 8px !important;
+  min-height: 36px !important;
+  border-radius: 8px !important;
+}
+
+.new-project-filter-btn:hover {
+  background-color: var(--aurora-palette-action-hover) !important;
+}
+
+/* Divider */
+.new-project-divider {
+  width: 100%;
+  height: 1px;
+  background-color: var(--aurora-palette-divider);
+  margin: 0;
+}
+
+/* Section */
+.new-project-section {
+  padding: 0 40px;
+}
+
+.new-project-section.blank-section {
+  margin-top: -40px; /* Compensate for content gap since blank has no title */
+}
+
+.new-project-section.sla-section {
+  margin-top: -40px; /* Compensate for content gap */
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.new-project-section-title {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-size: 24px !important;
+  font-weight: 500 !important;
+  line-height: 36px !important;
+  color: var(--aurora-palette-text-primary) !important;
+  margin: 0 !important;
+}
+
+/* Templates Grid */
+.new-project-templates-grid {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.new-project-templates-grid.blank-grid {
+  /* Single card for blank template */
+}
+
+.new-project-templates-grid.sla-grid {
+  /* Three cards side by side */
+}
+
+/* Template Card */
+.new-project-template-card {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  width: 355px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.new-project-template-card:hover {
+  transform: translateY(-2px);
+}
+
+.new-project-template-preview {
+  width: 100%;
+  height: 200px;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.new-project-template-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.new-project-template-info {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.new-project-template-name {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  line-height: 21px !important;
+  color: var(--aurora-palette-text-primary) !important;
+  margin: 0 !important;
+}
+
+/* Responsive */
+@media (max-width: 1280px) {
+  .new-project-templates-grid.sla-grid {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 960px) {
+  .new-project-header,
+  .new-project-search-row,
+  .new-project-section {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .new-project-templates-grid {
+    flex-wrap: wrap;
+  }
+
+  .new-project-template-card {
+    width: calc(50% - 12px);
+    min-width: 280px;
+  }
+}
+
+@media (max-width: 640px) {
+  .new-project-header {
+    padding: 16px 20px;
+  }
+
+  .new-project-title {
+    font-size: 18px !important;
+  }
+
+  .new-project-search-row {
+    padding: 16px 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .new-project-search {
+    width: 100%;
+  }
+
+  .new-project-section {
+    padding: 0 20px;
+  }
+
+  .new-project-content {
+    gap: 24px !important;
+  }
+
+  .new-project-template-card {
+    width: 100%;
+    max-width: 355px;
+  }
+
+  .new-project-templates-grid {
+    justify-content: center;
+  }
+}
+

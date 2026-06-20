@@ -1,0 +1,544 @@
+/* Create Workflow Page Styles */
+/* Design tokens from Figma:
+   - Text/primary: #1B2124
+   - Success/main: #099F69
+   - Neutral/states/softDefault: #EBF2F5
+   - Primary/main: #3385F0
+   - Primary/dark: #2B71CC
+   - Primary/contrast: #FFFFFF
+   - Divider: #C3D3DB
+   - Input/filled/enabledFill: #EBF2F5
+   - Text/secondary: #4D595E
+*/
+
+/* Drawer Backdrop */
+.create-drawer-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9998;
+}
+
+/* Drawer Container */
+.create-drawer-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.create-drawer-content {
+  margin-left: 0 !important;
+  min-height: 100% !important;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.create-drawer-content .create-sidebar {
+  flex-shrink: 0;
+  width: 372px;
+}
+
+.create-drawer-content .create-main {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+}
+
+.create-drawer-content .create-content {
+  padding: 3rem 4rem;
+}
+
+.create-drawer-content .create-form-section {
+  max-width: 840px;
+}
+
+/* Canvas Wrapper for Step 2+ */
+.create-canvas-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: calc(100% - 76px); /* Subtract header height from Figma */
+  overflow: hidden;
+}
+
+.create-canvas-wrapper .workflow-canvas-container {
+  flex: 1;
+  min-height: 0;
+}
+
+.create-canvas-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #C3D3DB;
+  background-color: #ffffff;
+}
+
+/* Main Container */
+.create-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #ffffff;
+  margin-left: 64px; /* Account for sidebar width */
+}
+
+/* Left Sidebar */
+.create-sidebar {
+  width: 372px;
+  background-color: #ffffff;
+  border-right: 1px solid #C3D3DB;
+  padding: 24px 40px;
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+/* Logo */
+.create-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.create-logo-text {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #245DA8;
+}
+
+/* Stepper */
+.create-stepper {
+  flex: 1;
+}
+
+.create-stepper-title {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-size: 21px !important;
+  font-weight: 700 !important;
+  line-height: 32px !important;
+  color: #1B2124 !important;
+  margin-bottom: 24px !important;
+}
+
+.create-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.create-step-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.create-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 0.25rem 0;
+}
+
+.create-step-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.create-step-check {
+  color: #099F69 !important;
+  font-size: 24px !important;
+  width: 24px !important;
+  height: 24px !important;
+}
+
+.create-step-number {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+}
+
+.create-step-number.current {
+  background-color: #3385F0;
+  color: #ffffff;
+}
+
+.create-step-number.pending {
+  background-color: #EBF2F5;
+  color: #1B2124;
+  border: none;
+}
+
+.create-step-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.create-step-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 16px;
+  line-height: 21px;
+}
+
+.create-step-label.completed {
+  color: #1B2124;
+  font-weight: 700;
+}
+
+.create-step-label.current {
+  color: #1B2124;
+  font-weight: 500;
+}
+
+.create-step-label.pending {
+  color: #1B2124;
+  font-weight: 500;
+}
+
+.create-step-sublabel {
+  font-size: 0.75rem;
+  color: #4D595E;
+  margin-left: 0;
+}
+
+.create-step-line {
+  width: 2px;
+  height: 40px;
+  margin-left: 11px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.create-step-line.completed {
+  background-color: #099F69;
+}
+
+.create-step-line.current {
+  background-color: rgba(195, 211, 219, 0.6);
+}
+
+.create-step-line.pending {
+  background-color: rgba(195, 211, 219, 0.6);
+}
+
+@keyframes fillLineGreen {
+  0% {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+  100% {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+}
+
+/* Main Content */
+.create-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+}
+
+/* Header */
+.create-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+  height: 76px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #C3D3DB;
+}
+
+.create-header-title {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-size: 21px !important;
+  font-weight: 700 !important;
+  line-height: 32px !important;
+  color: #1B2124 !important;
+}
+
+.create-close-btn {
+  color: #4D595E !important;
+  width: 32px !important;
+  height: 32px !important;
+}
+
+.create-close-btn:hover {
+  background-color: rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Content Area */
+.create-content {
+  flex: 1;
+  padding: 3rem 4rem;
+  display: flex;
+  justify-content: center;
+}
+
+.create-form-section {
+  width: 100%;
+  max-width: 840px;
+}
+
+.create-form-title {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-size: 28px !important;
+  font-weight: 700 !important;
+  line-height: 42px !important;
+  letter-spacing: 0.42px !important;
+  color: #1B2124 !important;
+  margin-bottom: 40px !important;
+}
+
+/* Form */
+.create-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.create-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.create-field-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 21px;
+  color: #1B2124;
+}
+
+/* Input Styles */
+.create-input {
+  width: 100%;
+  padding: 9px 16px;
+  min-height: 42px;
+  background-color: #EBF2F5;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 21px;
+  color: #1B2124;
+  outline: none;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.create-input::placeholder {
+  color: #4D595E;
+}
+
+.create-input:focus {
+  background-color: #E3EBEF;
+  box-shadow: 0 0 0 2px rgba(51, 133, 240, 0.2);
+}
+
+/* Textarea Styles */
+.create-textarea {
+  width: 100%;
+  padding: 9px 16px;
+  min-height: 105px;
+  background-color: #EBF2F5;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 21px;
+  color: #1B2124;
+  outline: none;
+  resize: vertical;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.create-textarea::placeholder {
+  color: #4D595E;
+}
+
+.create-textarea:focus {
+  background-color: #E3EBEF;
+  box-shadow: 0 0 0 2px rgba(51, 133, 240, 0.2);
+}
+
+/* Select Styles */
+.create-select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.create-select {
+  width: 100%;
+  padding: 9px 40px 9px 16px;
+  min-height: 42px;
+  background-color: #EBF2F5;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 21px;
+  color: #4D595E;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.create-select:focus {
+  background-color: #E3EBEF;
+  box-shadow: 0 0 0 2px rgba(51, 133, 240, 0.2);
+}
+
+.create-select-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #4D595E;
+  pointer-events: none;
+  width: 24px;
+  height: 24px;
+}
+
+/* Button Styles */
+.create-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 24px;
+}
+
+.create-back-btn {
+  padding: 10px 22px !important;
+  min-height: 42px !important;
+  background-color: rgba(51, 133, 240, 0.16) !important;
+  border: none !important;
+  color: #2B71CC !important;
+  text-transform: none !important;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  line-height: 21px !important;
+  border-radius: 8px !important;
+}
+
+.create-back-btn:hover {
+  background-color: rgba(51, 133, 240, 0.24) !important;
+}
+
+.create-back-btn:disabled {
+  background-color: rgba(195, 211, 219, 0.4) !important;
+  color: #9CA3AF !important;
+}
+
+.create-next-btn {
+  padding: 10px 22px !important;
+  min-height: 42px !important;
+  background-color: #3385F0 !important;
+  color: #ffffff !important;
+  text-transform: none !important;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  line-height: 21px !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+}
+
+.create-next-btn:hover {
+  background-color: #2B71CC !important;
+}
+
+/* Responsive Styles */
+@media (max-width: 64rem) {
+  .create-content {
+    padding: 2rem;
+  }
+  
+  .create-form-section {
+    max-width: 100%;
+  }
+  
+  .create-sidebar,
+  .create-drawer-content .create-sidebar {
+    width: 280px;
+  }
+}
+
+@media (max-width: 48rem) {
+  .create-container {
+    flex-direction: column;
+  }
+  
+  .create-sidebar,
+  .create-drawer-content .create-sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #C3D3DB;
+    padding: 1rem;
+  }
+  
+  .create-stepper {
+    display: none;
+  }
+  
+  .create-content {
+    padding: 1.5rem;
+  }
+  
+  .create-form-title {
+    font-size: 1.25rem !important;
+  }
+}
+
+@media (max-width: 30rem) {
+  .create-header {
+    padding: 0.75rem 1rem;
+  }
+  
+  .create-header-title {
+    font-size: 1rem !important;
+  }
+  
+  .create-buttons {
+    flex-direction: column;
+  }
+  
+  .create-back-btn,
+  .create-next-btn {
+    width: 100%;
+  }
+}

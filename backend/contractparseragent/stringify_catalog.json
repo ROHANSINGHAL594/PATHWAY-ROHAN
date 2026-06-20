@@ -1,0 +1,288 @@
+{
+    "nodes": [
+        {
+            "id": "kafka",
+            "category": "io",
+            "stringify": "Reads from Kafka topic '<topic>' in <format> format"
+        },
+        {
+            "id": "redpanda",
+            "category": "io",
+            "stringify": "Reads from Redpanda topic '<topic>' in <format> format"
+        },
+        {
+            "id": "csv",
+            "category": "io",
+            "stringify": "Reads CSV data from path '<path>'"
+        },
+        {
+            "id": "jsonlines",
+            "category": "io",
+            "stringify": "Reads JSON lines data from path '<path>'"
+        },
+        {
+            "id": "airbyte",
+            "category": "io",
+            "stringify": "Reads from Airbyte streams <streams> using config '<config_file_path>'"
+        },
+        {
+            "id": "debezium",
+            "category": "io",
+            "stringify": "Reads CDC data from Debezium topic '<topic_name>'"
+        },
+        {
+            "id": "s3",
+            "category": "io",
+            "stringify": "Reads <format> data from S3 path '<path>'"
+        },
+        {
+            "id": "minio",
+            "category": "io",
+            "stringify": "Reads <format> data from MinIO path '<path>'"
+        },
+        {
+            "id": "deltalake",
+            "category": "io",
+            "stringify": "Reads from Delta Lake table at '<uri>'"
+        },
+        {
+            "id": "iceberg",
+            "category": "io",
+            "stringify": "Reads from Iceberg table '<table_name>' in catalog '<catalog>'"
+        },
+        {
+            "id": "plaintext",
+            "category": "io",
+            "stringify": "Reads plaintext data from path '<path>' matching pattern '<object_pattern>'"
+        },
+        {
+            "id": "http",
+            "category": "io",
+            "stringify": "Reads data from HTTP endpoint '<url>' using <method> method"
+        },
+        {
+            "id": "mongodb",
+            "category": "io",
+            "stringify": "Reads from MongoDB collection '<collection>' in database '<database>'"
+        },
+        {
+            "id": "postgres",
+            "category": "io",
+            "stringify": "Reads from PostgreSQL CDC topic '<topic_name>'"
+        },
+        {
+            "id": "sqlite",
+            "category": "io",
+            "stringify": "Reads from SQLite table '<table_name>' at path '<path>'"
+        },
+        {
+            "id": "gdrive",
+            "category": "io",
+            "stringify": "Reads from Google Drive object '<object_id>'"
+        },
+        {
+            "id": "kinesis",
+            "category": "io",
+            "stringify": "Reads from AWS Kinesis stream '<stream_name>' in <format> format"
+        },
+        {
+            "id": "nats",
+            "category": "io",
+            "stringify": "Reads from NATS subject '<subject>' in <format> format"
+        },
+        {
+            "id": "mqtt",
+            "category": "io",
+            "stringify": "Reads from MQTT broker '<broker>' topic '<topic>'"
+        },
+        {
+            "id": "python",
+            "category": "io",
+            "stringify": "Reads from Python connector with subject '<subject>'"
+        },
+        {
+            "id": "open_tel_spans_input",
+            "category": "io",
+            "stringify": "Reads OpenTelemetry spans from Kafka topic '<topic>'"
+        },
+        {
+            "id": "open_tel_metrics_input",
+            "category": "io",
+            "stringify": "Reads OpenTelemetry metrics from Kafka topic '<topic>'"
+        },
+        {
+            "id": "open_tel_logs_input",
+            "category": "io",
+            "stringify": "Reads OpenTelemetry logs from Kafka topic '<topic>'"
+        },
+        {
+            "id": "filter",
+            "category": "table",
+            "stringify": "Filters input <input_index> where '<<col name> <op> <value>>'(condition)",
+            "description": "Row-level filter operator over a table. It evaluates one or more Boolean conditions over columns (comparisons like ==, !=, <, >, >=, <= or string operations like contains/startswith/endswith) and keeps only rows where all configured predicates are satisfied. Used to restrict the stream to events of interest (e.g. only 5xx responses, only a specific service or tenant)."
+        },
+        {
+            "id": "group_by",
+            "category": "table",
+            "stringify": "Groups input <input_index> by <columns> and reduces with <reducers>.",
+            "description": "Aggregation operator that groups rows by one or more key columns (e.g. service, endpoint, time bucket) and then applies reducer functions over each group. Supported reducers are simple aggregations such as count(*), sum(col), avg(col), min(col), max(col) over the rows that have already passed through previous transformations."
+        },
+        {
+            "id": "json_select",
+            "category": "table",
+            "stringify": "Selects attribute <property> from JSON column <json_column> and optionally stores it in <new_column_name> in input <input_index>",
+            "description": "Column-level transformation for semi-structured JSON payloads. It reads a nested property from a JSON column (e.g. body.user.id or attributes[\"http.status_code\"]) and materializes it as a typed scalar column (string/int/float/bool or JSON). This is typically used before filters/group_bys to expose fields like status_code, route, tenant_id, region etc as first-class columns for analytics."
+        },
+        {
+            "id": "flatten",
+            "category": "table",
+            "stringify": "Flattens iterable column <column> in input <input_index>, retaining the column name",
+            "description": "Explodes array-like or iterable values in a column so that each element becomes its own row, while keeping all other columns duplicated. Useful when logs or metrics contain lists (e.g. list of errors, headers, tags) and you want to aggregate or filter at the element level rather than the entire list."
+        },
+        {
+            "id": "arithmetic",
+            "category": "table",
+            "stringify": "Performs <operator> operation on columns <col_a> and <col_b> from input <input_index>, storing result in <new_col>",
+            "description": "Applies arithmetic operations (+, -, *, /, //, %) between two columns and stores the result in a new column."
+        },
+        {
+            "id": "comparison",
+            "category": "table",
+            "stringify": "Compares columns <col_a> and <col_b> using <operator> from input <input_index>, storing result in <new_col>",
+            "description": "Performs comparison operations (==, !=, >, <, >=, <=) between two columns and stores the boolean result in a new column."
+        },
+        {
+            "id": "boolean",
+            "category": "table",
+            "stringify": "Applies boolean operation <operator> on columns <col_a> and <col_b> from input <input_index>, storing result in <new_col>",
+            "description": "Applies boolean operations (&, |, ^, ~) between columns and stores the result in a new column."
+        },
+        {
+            "id": "window_by",
+            "category": "temporal",
+            "stringify": "Groups input <input_index> by <window> window on <time_col> with optional instance column <instance_col> and reduces with <reducers>",
+            "description": "Time-windowed aggregation over a streaming table. It slices the input stream into session, sliding, or tumbling windows based on a time column (e.g. timestamp) and optionally an instance key (e.g. service, instance_id, user). Within each window and instance, it applies simple reducers (count(*), sum(col), avg(col), min(col), max(col)) to compute time-based KPIs such as request rate or error count per window. IMPORTANT: conditional KPIs like '5xx_error_count' are expressed as a pipeline of (1) a filter node that keeps only 5xx rows, followed by (2) a window_by with count(*) over that filtered stream. You MUST NOT describe reducers as count(IF(condition)) or count_if; always model conditions as explicit filter steps before the aggregation. This is the primary building block for SLA metrics that are evaluated over fixed durations (1m/5m/1h)."
+        },
+        {
+            "id": "join",
+            "category": "table",
+            "stringify": "<HOW> Joins input <left_index> with <right_index> on <join_conditions>",
+            "description": "Relational join between two static or streaming tables on equality of one or more key columns (e.g. service_id, user_id, trace_id). Supports join modes like inner, left, right and outer. Used to enrich events with reference data (e.g. SLO targets, ownership metadata) or to correlate metrics/logs from different sources on shared keys."
+        },
+        {
+            "id": "asof_now_join",
+            "category": "table",
+            "stringify": "<HOW> ASOF Now Joins input <left_index> with <right_index> on <join_conditions>",
+            "description": "As-of-now join where the left side (typically a streaming fact table) is enriched with the most recent matching row from the right side as of processing time. Useful for attaching slowly changing configuration or threshold tables (e.g. latest SLO configuration, feature flags) to live events without re-emitting the entire dimension table."
+        },
+        {
+            "id": "asof_join",
+            "category": "temporal",
+            "stringify": "<HOW> ASOF Joins input <left_index> with <right_index> on time columns <time_col1> and <time_col2> (direction: <direction>)",
+            "description": "Temporal as-of join aligning two time-series tables based on time columns and optional keys. For each row on the left side, it finds the closest row on the right side in a given direction (backward, forward, nearest) under key equality. This is ideal for correlating metrics sampled at different cadences (e.g. aligning request logs with infrastructure metrics like CPU or saturation at the nearest timestamp)."
+        },
+        {
+            "id": "interval_join",
+            "category": "temporal",
+            "stringify": "<HOW> Interval Joins input <left_index> with <right_index> on <time_col1> and <time_col2> within bounds [<lower_bound>, <upper_bound>]",
+            "description": "Temporal interval join that matches rows from two streams when their timestamps fall within a specified time window relative to each other (e.g. right.time in [left.time + lower_bound, left.time + upper_bound]). This is useful for detecting patterns like \"errors within 5 minutes after a deployment event\" or \"alerts shortly after a config change\"."
+        },
+        {
+            "id": "window_join",
+            "category": "temporal",
+            "stringify": "<HOW> Window Joins input <left_index> with <right_index> on <time_col1> and <time_col2> using <window> window",
+            "description": "Window-based join that first groups both sides into the same temporal windows (session/sliding/tumbling) and then joins rows that fall into the same window. This correlates events that co-occur in the same time bucket, such as joining error logs with traffic volume metrics per 5-minute window for downstream error-rate computation."
+        },
+        {
+            "id": "kafka_write",
+            "category": "io",
+            "stringify": "Writes input <input_index> to Kafka topic '<topic_name>' in <format> format"
+        },
+        {
+            "id": "redpanda_write",
+            "category": "io",
+            "stringify": "Writes input <input_index> to Redpanda topic '<topic_name>' in <format> format"
+        },
+        {
+            "id": "csv_write",
+            "category": "io",
+            "stringify": "Writes input <input_index> to CSV file '<filename>'"
+        },
+        {
+            "id": "jsonlines_write",
+            "category": "io",
+            "stringify": "Writes input <input_index> to JSON Lines file '<filename>'"
+        },
+        {
+            "id": "postgres_write",
+            "category": "io",
+            "stringify": "Writes input <input_index> to PostgreSQL table '<table_name>'"
+        },
+        {
+            "id": "mysql_write",
+            "category": "io",
+            "stringify": "Writes input <input_index> to MySQL table '<table_name>'"
+        },
+        {
+            "id": "mongodb_write",
+            "category": "io",
+            "stringify": "Writes input <input_index> to MongoDB collection '<collection>' in database '<database>'"
+        },
+        {
+            "id": "bigquery_write",
+            "category": "io",
+            "stringify": "Writes input <input_index> to BigQuery table '<project_id>.<dataset>.<table>'"
+        },
+        {
+            "id": "elasticsearch_write",
+            "category": "io",
+            "stringify": "Writes input <input_index> to Elasticsearch index '<index>'"
+        },
+        {
+            "id": "dynamodb_write",
+            "category": "io",
+            "stringify": "Writes input <input_index> to DynamoDB table '<table_name>'"
+        },
+        {
+            "id": "pubsub_write",
+            "category": "io",
+            "stringify": "Writes input <input_index> to Pub/Sub topic '<topic>'"
+        },
+        {
+            "id": "kinesis_write",
+            "category": "io",
+            "stringify": "Writes input <input_index> to AWS Kinesis stream '<stream_name>'"
+        },
+        {
+            "id": "nats_write",
+            "category": "io",
+            "stringify": "Writes input <input_index> to NATS subject '<topic>' in <format> format"
+        },
+        {
+            "id": "mqtt_write",
+            "category": "io",
+            "stringify": "Writes input <input_index> to MQTT broker '<broker>' topic '<topic>'"
+        },
+        {
+            "id": "logstash_write",
+            "category": "io",
+            "stringify": "Writes input <input_index> to Logstash endpoint '<endpoint>'"
+        },
+        {
+            "id": "questdb_write",
+            "category": "io",
+            "stringify": "Writes input <input_index> to QuestDB at '<host>:<port>'"
+        },
+        {
+            "id": "alert",
+            "category": "action",
+            "stringify": "Generates intelligent alerts from input <input_index> using LLM-based analysis and publishes them to Kafka alerts topic for the pipeline"
+        },
+        {
+            "id": "trigger_rca",
+            "category": "agent",
+            "stringify": "Triggers root cause analysis on metric data from input <input_index> for '<metric_description>', extracting trace identifiers and correlating with pipeline topology",
+            "description": "Triggers root cause analysis (RCA) on SLA metric violations by extracting OpenTelemetry trace identifiers from metric data, correlating them with the pipeline topology that produced the metric, and generating comprehensive natural-language summaries that explain what telemetry entities contributed to the metric breach. The metric_description parameter defines the monitored condition, and the node automatically identifies semantic origins of trace identifiers through the transformation pipeline for deep diagnostic insights."
+        }
+    ]
+}

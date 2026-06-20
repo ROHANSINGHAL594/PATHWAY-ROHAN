@@ -1,0 +1,193 @@
+/* Base Node Styles - Layout and Positioning Only */
+
+.base-node-wrapper {
+  position: relative;
+}
+
+/* Extended Action Bar */
+.base-node-action-bar {
+  position: absolute;
+  top: -28px;
+  right: 0;
+  height: 28px;
+  border-radius: 6px 6px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
+  z-index: 1000;
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Action Buttons */
+.base-node-action-btn {
+  width: 24px !important;
+  height: 24px !important;
+  background-color: transparent !important;
+  transition: all 0.2s ease !important;
+  padding: 4px !important;
+  min-width: unset !important;
+}
+
+.base-node-action-btn svg {
+  font-size: 0.85rem;
+}
+
+.base-node-action-btn:hover {
+  transform: scale(1.15);
+}
+
+.base-node-action-btn:active {
+  transform: scale(0.9);
+}
+
+/* Node Paper Styles */
+.base-node-paper {
+  min-width: 200px;
+  max-width: 350px; /* 1.75x the default width */
+  min-height: 100px;
+  border-radius: 10px !important;
+  padding: 0 !important;
+  position: relative;
+  transition: all 0.2s ease !important;
+  overflow: visible !important;
+}
+
+.base-node-wrapper:hover .base-node-paper {
+  border-top-right-radius: 0 !important;
+}
+
+/* Node Header Section (Colored) - Icon + Title */
+.base-node-header {
+  padding: 10px 14px;
+  border-radius: 10px 10px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.base-node-header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+/* Node Body Section - Properties Only */
+.base-node-body {
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 40px;
+  border-radius: 0 0 10px 10px;
+}
+
+/* Smaller height when empty - about 3/4th of header height */
+.base-node-body:has(> .MuiTypography-root[style*="italic"]) {
+  padding: 10px 16px;
+  min-height: 0;
+  height: 30px;
+  display: flex;
+  align-items: center;
+}
+
+/* Node Title (in colored header) */
+.base-node-title-in-header {
+  font-weight: 600 !important;
+  font-size: 0.875rem !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+
+/* Icon in colored header */
+.base-node-indicator-dot {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.base-node-indicator-dot svg {
+  font-size: 16px;
+}
+
+/* Properties */
+.base-node-properties {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.base-node-property-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.base-node-property-label {
+  font-size: 0.65rem !important;
+  font-weight: 500 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.base-node-property-value {
+  border-radius: 4px;
+  padding: 6px 10px;
+  font-size: 0.75rem;
+  font-family: 'Roboto Mono', monospace;
+  position: relative;
+  cursor: default;
+}
+
+.base-node-property-value-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+/* Handles */
+.base-node-handle {
+  width: 10px !important;
+  height: 10px !important;
+  border-radius: 50% !important;
+}
+
+.base-node-handle.input {
+  left: -5px !important;
+}
+
+.base-node-handle.output {
+  right: -5px !important;
+}

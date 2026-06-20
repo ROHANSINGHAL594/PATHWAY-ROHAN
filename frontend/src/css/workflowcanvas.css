@@ -1,0 +1,122 @@
+/* Workflow Canvas Styles */
+
+.workflow-canvas-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background-color: var(--aurora-palette-background-paper);
+}
+
+.workflow-canvas-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--aurora-palette-divider);
+  background-color: var(--aurora-palette-background-elevation1);
+}
+
+.workflow-canvas-title {
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  color: var(--aurora-palette-text-primary) !important;
+}
+
+.workflow-canvas-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.workflow-canvas-save-btn {
+  text-transform: none !important;
+  font-size: 0.8125rem !important;
+  font-weight: 500 !important;
+  border-color: var(--aurora-palette-primary-main) !important;
+  color: var(--aurora-palette-primary-main) !important;
+  padding: 0.375rem 1rem !important;
+  border-radius: 0.375rem !important;
+}
+
+.workflow-canvas-save-btn:hover {
+  background-color: var(--aurora-palette-primary-lighter) !important;
+}
+
+.workflow-canvas-area {
+  flex: 1;
+  position: relative;
+  padding: 1rem;
+  background-color: var(--aurora-palette-background-paper);
+  overflow: hidden;
+}
+
+.workflow-canvas-wrapper {
+  width: 100%;
+  height: 100%;
+  background-color: var(--aurora-palette-background-elevation1);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  border: 1px solid var(--aurora-palette-divider);
+}
+
+.workflow-canvas-toolbar {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.25rem;
+  background-color: var(--aurora-palette-background-elevation2);
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+}
+
+.workflow-canvas-toolbar-btn {
+  background-color: transparent !important;
+  color: var(--aurora-palette-text-primary) !important;
+  width: 30px !important;
+  height: 30px !important;
+  border-radius: 0.375rem !important;
+}
+
+.workflow-canvas-toolbar-btn:hover {
+  background-color: var(--aurora-palette-action-hover) !important;
+}
+
+.workflow-canvas-toolbar-btn.add-btn {
+  background-color: var(--aurora-palette-background-paper) !important;
+  color: var(--aurora-palette-text-primary) !important;
+}
+
+.workflow-canvas-toolbar-btn.add-btn:hover {
+  background-color: var(--aurora-palette-action-hover) !important;
+}
+
+.workflow-canvas-toolbar-divider {
+  width: 1px;
+  background-color: var(--aurora-palette-text-secondary);
+  margin: 0 0.25rem;
+}
+
+.workflow-canvas-empty {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+}
+
+.workflow-canvas-empty-title {
+  font-size: 1.125rem !important;
+  font-weight: 600 !important;
+  color: var(--aurora-palette-text-secondary) !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.workflow-canvas-empty-subtitle {
+  font-size: 0.875rem !important;
+  color: var(--aurora-palette-text-disabled) !important;
+}
